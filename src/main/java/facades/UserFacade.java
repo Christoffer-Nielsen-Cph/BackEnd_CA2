@@ -111,17 +111,18 @@ public class UserFacade {
     }
 
 
-    public UserDTO updateUser(int id, User userUpdate) {
+    public User updateUser(User user) {
         EntityManager em = getEntityManager();
-        User user;
+        User toUpdate = em.find(User.class,user.getId());
         try {
-            user = em.find(User.class, id);
             em.getTransaction().begin();
-            user.setUserName(userUpdate.getUserName());
-            user.setUserPass(userUpdate.getUserPass());
-            user.addRole(new Role("user"));
+            toUpdate.setUserName(user.getUserName());
+            toUpdate.setUserPass(user.getUserPass());
+            toUpdate.setRoleList(user.getRoleList());
+            toUpdate.addRole(new Role("user"));
+            em.merge(toUpdate);
             em.getTransaction().commit();
-            return new UserDTO(user);
+            return user;
         } finally {
             em.close();
         }

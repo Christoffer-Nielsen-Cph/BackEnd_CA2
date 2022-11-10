@@ -83,8 +83,8 @@ public class UserResource {
         User user = userDTO.toUser();
         User newUser = FACADE.createUser(user);
         return GSON.toJson(newUser);
-
     }
+
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
@@ -109,14 +109,16 @@ public class UserResource {
     }
 
     @PUT
-    @Path("{id}")
+    @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response updateUser(@PathParam("id") int id, String content) throws API_Exception {
-        UserDTO userDTO = GSON.fromJson(content,UserDTO.class);
-        User user = userDTO.toUser();
-        UserDTO userUpdated = FACADE.updateUser(id,user);
-        return Response.ok().entity(GSON.toJson(userUpdated)).build();
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response update(@PathParam("id") Integer id, String content) {
+        User udto = GSON.fromJson(content, User.class);
+        udto.setId(id);
+        User updated = FACADE.updateUser(udto);
+        return Response.ok().entity(GSON.toJson(updated)).type(MediaType.APPLICATION_JSON_TYPE.withCharset(StandardCharsets.UTF_8.name())).build();
     }
+
 
 
 

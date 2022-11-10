@@ -11,7 +11,7 @@ GET http://localhost:8080/api/info/count
 Accept: application/json
 
 ### Creates a new person
-POST https://cphcn332.dk/tomcat/BackEnd_CA2/api/info
+POST http://localhost:8080/api/info/
 Content-Type: application/json
 
 {"userName": "chris", "userPass": "chris"}
@@ -20,7 +20,7 @@ Content-Type: application/json
 PUT http://localhost:8080/api/info/6
 Content-Type: application/json
 
-{"userName": "christest", "userPass": "test"}
+{"userName": "test", "userPass": "test"}
 
 ### Deletes a user by his id
 DELETE http://localhost:8080/api/info/user/34
