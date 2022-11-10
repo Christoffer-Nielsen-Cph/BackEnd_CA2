@@ -17,7 +17,7 @@ Content-Type: application/json
 {"userName": "chris", "userPass": "chris"}
 
 ### Updates a person by his id
-PUT http://localhost:8080/api/info/6
+PUT http://localhost:8080/api/info/2
 Content-Type: application/json
 
 {"userName": "test", "userPass": "test"}
